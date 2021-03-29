@@ -31,6 +31,13 @@ describe('ConfigCat » Pricing Table On Main Page', () => {
 
     it('Home page » Pricing table has 6 columns', () => {
         tableHelper.getColumns(pageData.pricingTable.pricingTable, 'pricing-name').should('have.length', 6)
-        tableHelper.getCellText(pageData.pricingTable.pricingTable, 'pricing-name', 1).then(val => cy.log(val))
     })
+
+    it('Home page » Click on (SLA) link', () => {
+        tableHelper.getCellByRowIndex(pageData.pricingTable.pricingTable, 10, 0).find('a')
+        .should('have.attr', 'href', '/sla')
+        .click({force: true})
+        cy.url().should('eq', url + "sla/")
+    })
+    
 })

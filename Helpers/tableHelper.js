@@ -3,15 +3,38 @@ export function getRowByClassName(table, rowClassName) {
     return cy.get(table).get('tr').filter('.' + rowClassName)
 }
 
-//get columns from a table, by row
+//get row by rowIndex
+export function getRowByIndex(table, rowIndex) {
+    return cy.get(table).get('tr').then(($rows) => {
+        cy.wrap($rows).eq(rowIndex)
+    })
+}
+
+//get columns from a table, by rowClassName
 export function getColumns(table, rowClassName) {
     return getRowByClassName(table, rowClassName).find('td')
 }
 
-//get cell text content from a table
-export function getCellText(table, rowClassName, tdIndex) {
-    const text = getColumns(table, rowClassName).then(($cells) => {
-        cy.wrap($cells).eq(tdIndex).invoke('text')
+//get columns from a table, by rowIndex
+export function getColumnsByRowIndex(table, rowIndex) {
+    return getRowByIndex(table, rowIndex).find('td')
+}
+
+//get cell
+export function getCell(table, rowClassName, tdIndex) {
+    return getColumns(table, rowClassName).then(($cells) => {
+        cy.wrap($cells).eq(tdIndex)
     })
-    return text
+}
+
+//get cell rowindex
+export function getCellByRowIndex(table, rowIndex, tdIndex) {
+    return getColumnsByRowIndex(table, rowIndex).then(($cells) => {
+        cy.wrap($cells).eq(tdIndex)
+    })
+}
+
+//get cell text content from a table by rowClassName
+export function getCellText(table, rowClassName, tdIndex) {
+    return getCell(table, rowClassName, tdIndex).invoke('text')
 }
