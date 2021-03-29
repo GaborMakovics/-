@@ -1,6 +1,6 @@
 import * as pageData from '../../Helpers/loginPageHelper.js'
 
-describe('ConfigCat Login Page', () => {
+describe('ConfigCat » Login Page', () => {
 
     it('Login Page Has Two Main Parts', () => {
         cy.visit('/')
