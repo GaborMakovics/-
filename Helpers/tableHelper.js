@@ -1,6 +1,11 @@
-//get row by class
+/* //get row by class
 export function getRowByClassName(table, rowClassName) {
     return cy.get(table).get('tr').filter('.' + rowClassName)
+} */
+
+//get row by id
+export function getRowById(table, rowId) {
+    return cy.get(table).get('tr').filter('#' + rowId)
 }
 
 //get row by rowIndex
@@ -10,9 +15,9 @@ export function getRowByIndex(table, rowIndex) {
     })
 }
 
-//get columns from a table, by rowClassName
-export function getColumns(table, rowClassName) {
-    return getRowByClassName(table, rowClassName).find('td')
+//get columns from a table, by rowId
+export function getColumns(table, rowId) {
+    return getRowById(table, rowId).find('td')
 }
 
 //get columns from a table, by rowIndex
@@ -21,8 +26,8 @@ export function getColumnsByRowIndex(table, rowIndex) {
 }
 
 //get cell
-export function getCell(table, rowClassName, tdIndex) {
-    return getColumns(table, rowClassName).then(($cells) => {
+export function getCell(table, rowId, tdIndex) {
+    return getColumns(table, rowId).then(($cells) => {
         cy.wrap($cells).eq(tdIndex)
     })
 }
@@ -34,7 +39,7 @@ export function getCellByRowIndex(table, rowIndex, tdIndex) {
     })
 }
 
-//get cell text content from a table by rowClassName
-export function getCellText(table, rowClassName, tdIndex) {
-    return getCell(table, rowClassName, tdIndex).invoke('text')
+//get cell text content from a table by rowId
+export function getCellText(table, rowId, tdIndex) {
+    return getCell(table, rowId, tdIndex).invoke('text')
 }
